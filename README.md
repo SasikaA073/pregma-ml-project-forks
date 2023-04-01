@@ -2,11 +2,14 @@
 
 ## Contents
 
-- [Road Map](#road-mapp)
-- [Dataset links](#node-environment)
+- [Road Map](#road-map)
+- [Dataset links](#dataset-links)
   - [Running the Project](#running-the-project)
   - [Recommended IDE Setup](#recommended-ide-setup)
 - [Project Setup](#project-setup)
+  - [Web app tech stack](#web-app-tech-stack)
+  - [Model tech stack](#model-tech-stack)
+  - [Running the project](#running-the-project)
 - [Development](#development)
   - [Branches](#branches)
 - [Deploying](#deploying)
@@ -29,8 +32,6 @@
 *
 
 
-
-
 ## Project Setup
 ### Web app tech stack
 * Flask
@@ -44,8 +45,6 @@ NOTE: Frontend can be changed arbitarily
 * PyTorch
 * Tensorflow
 * Pandas
-
-## Project Setup
 
 Enter the detailed info about project setup here.
 
