@@ -18,7 +18,7 @@
 ## Web app tech stack
 * Flask
 * Vue JS
-* Bootstrap JS 
+* Bootstrap JS    
 NOTE: Frontend can be changed arbitarily
 
 ## Model tech stack 
