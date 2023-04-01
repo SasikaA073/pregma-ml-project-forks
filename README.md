@@ -21,7 +21,7 @@
 * Bootstrap JS 
 NOTE: Frontend can be changed arbitarily
 
-## Model teck stack 
+## Model tech stack 
 * Vertex AI
 * Heroku 
 * PyTorch
