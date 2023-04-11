@@ -26,10 +26,11 @@
 
 ## Dataset links
 
-* [Kaggle dataset](www.kaggle.com)
-* 
-*
-*
+- [Kaggle dataset](www.kaggle.com)
+- (https://archive.ics.uci.edu/ml/datasets.php)
+- https://archive.ics.uci.edu/ml/datasets/Diabetes *Timeseries dataset*
+- https://archive.ics.uci.edu/ml/datasets/Breast+Cancer
+- 
 
 
 ## Project Setup
