@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Breast Cancer Diagnosis</title>
+</head>
+
+<body>
+    <h1>Breast Cancer Diagnosis</h1>
+    <form action="/predict" method="post" id="form1">
+        <h2>Input for Diagnosis:</h2>
+
+        <!-- Have to add radio button input instead of text input -->
+
+        <label for="input_clump_thickness">clump_thickness:</label>
+        <input type="text" name="form1-input_clump_thickness" id="input_clump_thickness" required><br>
+
+        <label for="input_uniformity_of_cell_size">uniformity_of_cell_size:</label>
+        <input type="text" name="form1-input_uniformity_of_cell_size" id="input_uniformity_of_cell_size" required><br>
+
+        <label for="input_uniformity_of_cell_shape">uniformity_of_cell_shape:</label>
+        <input type="text" name="form1-input_uniformity_of_cell_shape" id="input_uniformity_of_cell_shape" required><br>
+
+        <label for="input_marginal_adhesion">marginal_adhesion:</label>
+        <input type="text" name="form1-input_marginal_adhesion" id="input_marginal_adhesion" required><br>
+
+        <label for="input_single_epithelial_cell_size">single_epithelial_cell_size:</label>
+        <input type="text" name="form1-input_single_epithelial_cell_size" id="input_single_epithelial_cell_size"
+            required><br>
+
+        <label for="input_bare_nuclei">bare_nuclei:</label>
+        <input type="text" name="form1-input_bare_nuclei" id="input_bare_nuclei" required><br>
+
+        <label for="input_bland_chromatin">bland_chromatin:</label>
+        <input type="text" name="form1-input_bland_chromatin" id="input_bland_chromatin" required><br>
+
+        <label for="input_normal_nucleoli">normal_nucleoli:</label>
+        <input type="text" name="form1-input_normal_nucleoli" id="input_normal_nucleoli" required><br>
+
+        <label for="input_mitoses">mitoses:</label>
+        <input type="text" name="form1-input_mitoses" id="input_mitoses" required><br>
+
+        <input type="submit" value="Diagnose">
+    </form>
+
+    
+    
+   
+</body>
+
+</html>
