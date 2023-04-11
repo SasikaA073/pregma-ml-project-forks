@@ -8,7 +8,45 @@
 </head>
 <body>
 
-    <h1>Search App</h1>
+    <h1>PregMa App</h1>
+    
+    <form method="POST" action="/">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+    
+      <label for="weight">Weight:</label>
+      <input type="number" id="weight" name="weight" required>
+    
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" required>
+    
+      <label for="fetussage">Fetus's Age:</label>
+      <input type="number" id="fetussage" name="fetussage" required>
+    
+      <label for="bloodgroup">Blood Group:</label>
+      <select id="bloodgroup" name="bloodgroup" required>
+        <option value="">--Please select--</option>
+        <option value="Apositive">A+</option>
+        <option value="Anegative">A-</option>
+        <option value="Bpositive">B+</option>
+        <option value="Bnegative">B-</option>
+        <option value="Opositive">O+</option>
+        <option value="Onegative">O-</option>
+        <option value="ABpositive">AB+</option>
+        <option value="ABnegative">AB-</option>
+      </select>
+    
+      <label for="sugarlevel">Sugar Level:</label>
+      <input type="text" id="sugarlevel" name="sugarlevel">
+    
+      <input type="submit" value="Submit">
+    </form>
+    This form includes fields for the user's name, email, age, gender, and interests. The form also specifies that each
+    field is required to be filled out before submitting the form.
+    
+    Once the form is submitted, the data can be processed by a Flask route and stored in a database or used in any other way
+    needed for your app.
+
     <form method="POST" action="/">
       <label for="keywords">Enter Keywords:</label>
       <input type="text" id="keywords" name="keywords">
