@@ -1,4 +1,4 @@
-,month_no,Age,SystolicBP,DiastolicBP,BS,BodyTemp,HeartRate,RiskLevel
+index,month_no,Age,SystolicBP,DiastolicBP,BS,BodyTemp,HeartRate,RiskLevel
 0,2,25,128,79.0,18.0,98.0,94,mid risk
 1,2,35,123,79.0,12.0,98.0,74,mid risk
 2,2,29,96,74.0,11.0,100.0,90,low risk
