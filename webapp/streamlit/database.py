@@ -17,22 +17,31 @@ deta = Deta(DETA_KEY)
 patients_db = deta.Base("patients_db")
 
 # Insert data
-def insert_patient(patient_id, first_name, last_name, nic, date_of_birth, blood_group, mobile_number, month, month_data):
+def insert_patient(patient_id, first_name, last_name, nic, age, blood_group, mobile_number, month,systolicBP, diastolicBP, blood_sugar, body_temp, heart_rate, prediction, date):
     patients_db.insert({
         "key": patient_id,
         "first_name": first_name,
         "last_name": last_name,
         "nic": nic,
-        "date_of_birth": date_of_birth,
+        # "date_of_birth": date_of_birth,
+        "age":age,
         "blood_group": blood_group,
         "mobile_number": mobile_number,
-        "data":{month:month_data}
+        "month":month,
+        "systolicBP":systolicBP,
+        "diastolicBP":diastolicBP,
+        "blood_sugar":blood_sugar,
+        "body_temp":body_temp,
+        "heart_rate":heart_rate,
+        "prediction":prediction,
+        "date":date         
     })
 
 
 
 # insert_patient("P001", "Kamala", 25, 1)
 # insert_patient("P002", "Nimala", 30, 2)
+
 
 # Get data
 def get_patient(patient_id):
