@@ -1,4 +1,6 @@
 import streamlit as st
+from classes import Patient
+from database import *
 
 st.set_page_config(
     page_title="PregMa - Mother's Health Monitoring System", 
@@ -9,6 +11,7 @@ st.set_page_config(
 st.title("Register a New Mother")
 
 with st.form(key='reg_form'):
+    patient_id = st.text_input(label='Patient ID').lower()
     first_name = st.text_input(label='First Name')
     last_name = st.text_input(label='Last Name')
     nic = st.text_input(label='NIC')
@@ -19,7 +22,7 @@ with st.form(key='reg_form'):
     submit_button = st.form_submit_button(label='Register')
 
     if submit_button:
-        st.success("Mother {} Registered Successfully".format(first_name))
+        st.success(f"Mother {patient_id} Registered Successfully".format(first_name))
         st.balloons()
         st.write("First Name: ", first_name)
         st.write("Last Name: ", last_name)
@@ -27,21 +30,29 @@ with st.form(key='reg_form'):
         st.write("Blood Group: ", blood_group)
         st.write("Mobile Number: ", mobile_number)
 
+
+        P = Patient(patient_id, first_name, last_name, nic, date_of_birth, blood_group, mobile_number)
+
+        # add a patient to the database
+        insert_patient(P.to_dict())
 st.title("User Profile")
 
 with st.form(key='pred_form'):
+
+    patient_id = st.text_input(label='Patient ID').lower()
     systolicBP = st.text_input(label='Systolic Blood Pressure')
     diastolicBP = st.text_input(label='Diastolic Blood Pressure')
     blood_sugar = st.text_input(label='Blood Sugar Level')
     body_temp = st.text_input(label='Body Temperature (in Celsius))')
     heart_rate = st.text_input(label='Heart Rate (in BPM)')
-    month = 1
+    month = st.selectbox(label='Month', options=['1', '2', '3', '4', '5', '6'])
 
     submit_button = st.form_submit_button(label='Submit')
 
     if submit_button:
-        st.success("Mother's Month 1 results updated Successfully".format(first_name))
-        st.balloons()
+        st.success(f"Mother's Month {month} results updated Successfully".format(first_name))
+        # st.balloons()
+        st.write("Systolic Blood Pressure: ")
         st.write("Systolic Blood Pressure: ", systolicBP)   
         st.write("Diastolic Blood Pressure: ", diastolicBP)
         st.write("Blood Sugar Level: ", blood_sugar)
