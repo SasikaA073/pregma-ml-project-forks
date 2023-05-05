@@ -1,1 +1,5 @@
+deta
+python-dotenv
 streamlit
+scikit-learn
+plotly  
