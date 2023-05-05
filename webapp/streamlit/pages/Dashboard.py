@@ -1,6 +1,61 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+from deta import Deta
+import os
+from dotenv import load_dotenv
+from classes import Patient
+import pickle
+from database import * 
+
+# Load your Deta project key from an environment variable
+# load_dotenv(".env")
+# DETA_KEY = os.getenv('DETA_PROJECT_KEY') 
+DETA_KEY = "d0E7NcjK5X8P_RVUiBBKMe36JY7P9pen6WsDBawji3GTM"
+
+# Initialize Deta with a project key
+deta = Deta(DETA_KEY)
+
+# create a DB and connect it
+patients_db = deta.Base("patients_db")
+
+# a list of patients data
+all_patients_details = get_all_patients()
+
+patient_ids = []
+patient_first_names = []
+patient_last_names = []
+patient_nics = []
+patient_ages = []
+patient_blood_groups = []
+patient_mobile_numbers = []
+
+patient_systolicBPs_1 = []
+patient_diastolicBPs_1 = []
+patient_blood_sugars_1 = []
+patient_body_temps_1 = []
+patient_heart_rates_1 = []
+patient_predictions_1 = []
+patient_dates_1 = []
+
+for i, dict in enumerate(all_patients_details):
+    patient_ids.append(dict["key"])
+    patient_first_names.append(dict["first_name"])
+    patient_last_names.append(dict["last_name"])
+    patient_nics.append(dict["nic"])
+    patient_ages.append(dict["age"])
+    patient_blood_groups.append(dict["blood_group"])
+    patient_mobile_numbers.append(dict["mobile_number"])
+
+    patient_systolicBPs_1.append(dict["systolicBP"])
+    patient_diastolicBPs_1.append(dict["diastolicBP"])
+    patient_blood_sugars_1.append(dict["blood_sugar"])
+    patient_body_temps_1.append(dict["body_temp"])
+    patient_heart_rates_1.append(dict["heart_rate"])
+    patient_predictions_1.append(dict["prediction"])
+    # patient_dates_1.append(dict["date"])
+
+
 
 st.set_page_config(
     page_title="PregMa - Mother's Health Monitoring System", 
@@ -13,17 +68,29 @@ st.title("Patient's Dashboard")
 
 
 # Define the column names
-columns_1 = ['Patient ID', 'NIC', "Mother's name", 'Mobile Number', 'Month', 'Predicted Risk level']
+columns_1 = ['Patient ID', 'NIC',"First name", "Last name",
+             "Age", "Blood Group", 'Mobile Number',"month1 systolic blood pressure",
+             "month1 diastolic blood pressure", "month1 blood sugar", "month1 body temperature",
+             "month1 heart rate", "month1 prediction"]
 
 # Create a sample data frame
 data = {
-    'Patient ID': [1, 2, 3, 4, 5],
-    'NIC': ['12345-1234567-1', '23456-2345678-2', '34567-3456789-3', '45678-4567890-4', '56789-5678901-5'],
-    "Mother's name": ['Mary', 'John', 'Jane', 'Peter', 'Susan'],
-    'Mobile Number': ['123456789', '234567890', '345678901', '456789012', '567890123'],
-    'Month': ['1', '2', '4', '1', '3'],
-    'Predicted Risk level': ['High', 'Low', 'Medium', 'High', 'Low']
-}
+    'Patient ID': patient_ids,
+    'NIC': patient_nics,
+    "First name": patient_first_names,
+    "Last name": patient_last_names,
+    "Age": patient_ages,
+    "Blood Group": patient_blood_groups,
+    'Mobile Number': patient_mobile_numbers,
+
+    "month1 systolic blood pressure": patient_systolicBPs_1,
+    "month1 diastolic blood pressure": patient_diastolicBPs_1,
+    "month1 blood sugar": patient_blood_sugars_1,
+    "month1 body temperature": patient_body_temps_1,
+    "month1 heart rate": patient_heart_rates_1,
+    "month1 prediction": patient_predictions_1,
+    # "month1 date": patient_dates_1,
+    }
 
 df = pd.DataFrame(data)
 
