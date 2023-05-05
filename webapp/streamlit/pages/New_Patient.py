@@ -71,7 +71,7 @@ with st.form(key='reg_form'):
         month_data = {systolicBP, diastolicBP, blood_sugar, body_temp, heart_rate}
         insert_patient(patient_id, first_name, last_name, nic, age, blood_group, mobile_number, month, systolicBP, diastolicBP, blood_sugar, body_temp, heart_rate, prediction, date)
 
-        st.success(f"{patient_id} Mother's Month {month} results updated Successfully".format(first_name))
+        st.success(f"{patient_id} Mother's Month {month} results updated Successfully")
         # st.balloons()
         # st.write("Systolic Blood Pressure: ")
         # st.write("Systolic Blood Pressure: ", systolicBP)   

@@ -92,6 +92,9 @@ data = {
     # "month1 date": patient_dates_1,
     }
 
+# if one record is selected, display the details of that record
+# selected_indices = st.multiselect('Select rows:', patient_ids.index)
+
 df = pd.DataFrame(data)
 
 # Display the table
@@ -99,7 +102,7 @@ st.table(df[columns_1])
 
 st.divider()
 
-st.subheader("Mother {}'s Health Status")
+st.subheader(f"Mother 's Health Status")
 
 # Define the columns for the table
 columns = ['Patient\'s ID', 'NIC', 'First name', 'Last name', 'Mobile Number', 'Month', 'Current predicted Risk Level']
