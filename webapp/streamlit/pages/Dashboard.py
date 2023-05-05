@@ -109,7 +109,7 @@ columns = ['Patient\'s ID', 'NIC', 'First name', 'Last name', 'Mobile Number', '
 
 # Define a function to get the data for the table
 def get_data():
-    return [{'Patient\'s ID': '1', 'NIC': '1234567890', 'First name': 'John', 'Last name': 'Doe', 'Mobile Number': '1234567890', 'Month': 5, 'Current predicted Risk Level': 'High'}]
+    return [{'Patient\'s ID': '1', 'NIC': '1234567890', 'First name': 'John', 'Last name': 'Doe', 'Mobile Number': '1234567890', 'Month': 2, 'Current predicted Risk Level': 'High'}]
 
 # Display the table
 st.table(pd.DataFrame(get_data(), columns=columns))
@@ -120,19 +120,11 @@ columns = ['Month', 'Predicted Status', 'Actual Status']
 
 # Define the data for the table
 data = [['1', 'Low Risk', 'Low Risk'],
-    ['2', 'Low Risk', 'Low Risk'],
-    ['3', 'Low Risk', 'Low Risk'],
-    ['4', 'High Risk', 'High Risk'],
-    ['5', 'Low Risk', 'Low Risk'],
-    ['6', 'Mid Risk', 'Mid Risk'],
+    ['2', 'Low Risk', 'Low Risk']
 ]
 
-data_plot = [['1', '0', '0.5'],
-    ['2', '0', '0'],
-    ['3', '0', '0'],
-    ['4', '1', '0.5'],
-    ['5', '0', '0'],
-    ['6', '0.5', '1'],
+data_plot = [['1', '0', '0'],
+    ['2', '0', '0']
 ]
 
 st.table(pd.DataFrame(data, columns=columns))
