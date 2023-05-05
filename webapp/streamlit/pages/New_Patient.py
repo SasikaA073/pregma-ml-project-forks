@@ -5,7 +5,7 @@ import pickle
 import datetime
 
 # Load ML model
-ml_model_name = "./ml_models/month1_model.pkl"
+ml_model_name = "./month1_model.pkl"
 ml_model = pickle.load(open(ml_model_name, 'rb'))
 
 # A dictionary to map the output of the model to the risk level
