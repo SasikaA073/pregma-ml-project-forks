@@ -4,7 +4,7 @@ import pprint
 from flask import Flask, render_template, request
 
 # Open the csv file
-results_df = pd.read_csv("al_results_all_birthdays.csv")
+results_df = pd.read_csv("dataset.csv")
 
 # Define Flask application
 app = Flask(__name__)
