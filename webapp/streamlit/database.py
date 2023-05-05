@@ -17,7 +17,7 @@ deta = Deta(DETA_KEY)
 patients_db = deta.Base("patients_db")
 
 # Insert data
-def insert_patient(patient_id, first_name, last_name, nic, date_of_birth, blood_group, mobile_number):
+def insert_patient(patient_id, first_name, last_name, nic, date_of_birth, blood_group, mobile_number, month, month_data):
     patients_db.insert({
         "key": patient_id,
         "first_name": first_name,
@@ -25,7 +25,8 @@ def insert_patient(patient_id, first_name, last_name, nic, date_of_birth, blood_
         "nic": nic,
         "date_of_birth": date_of_birth,
         "blood_group": blood_group,
-        "mobile_number": mobile_number
+        "mobile_number": mobile_number,
+        "data":{month:month_data}
     })
 
 
