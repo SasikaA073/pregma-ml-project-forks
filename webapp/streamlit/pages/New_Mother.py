@@ -23,7 +23,7 @@ with st.form(key='reg_form'):
 
     if submit_button:
         st.success(f"Mother {patient_id} Registered Successfully".format(first_name))
-        st.balloons()
+        # st.balloons()
         st.write("First Name: ", first_name)
         st.write("Last Name: ", last_name)
         st.write("Date of Birth: ", date_of_birth)
@@ -34,7 +34,7 @@ with st.form(key='reg_form'):
         P = Patient(patient_id, first_name, last_name, nic, date_of_birth, blood_group, mobile_number)
 
         # add a patient to the database
-        insert_patient(P.to_dict())
+        insert_patient(P.patient_id, P.first_name, P.last_name, P.nic, P.date_of_birth, P.blood_group, P.mobile_number)
 st.title("User Profile")
 
 with st.form(key='pred_form'):
