@@ -15,7 +15,7 @@ st.title("PregMa ❤️")
 st.subheader("Pregnant mother's Health Monitoring System")
 
 # Load image
-logo = Image.open('logo.png')
+logo = Image.open('logo.png', width=200)
 
 # Display image using Streamlit
 st.image(logo)
