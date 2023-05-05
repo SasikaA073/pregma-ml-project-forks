@@ -31,8 +31,8 @@ class Patient:
 
 
     # function to convert a patient dictionary items
-    def to_dict_items(self):
-        
+    # def to_dict_items(self):
+
 
 
     def to_dict(self):
@@ -44,6 +44,6 @@ class Patient:
             "date_of_birth": self.date_of_birth,
             "blood_group": self.blood_group,
             "mobile_number": self.mobile_number,
-           }
+            }
 
     
