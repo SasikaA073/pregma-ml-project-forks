@@ -7,12 +7,12 @@ from PIL import Image
 
 st.set_page_config(
     page_title="PregMa App", 
-    page_icon="❤️",
+    page_icon="icon.png",
     layout="centered",
 )
 
 st.title("PregMa ❤️")
-st.subheader("Pregnant mother's Health Monitoring System")
+st.subheader("Pregnant mother Health Monitoring System")
 
 # Load image
 logo = Image.open('logo.png')
@@ -47,13 +47,12 @@ st.image(logo)
 
 st.sidebar.subheader("Contact Us")
 
-st.sidebar.caption("Dr. H. M. N. Dilum Bandara")
-st.sidebar.caption("National Hospital of Sri Lanka")
-st.sidebar.caption("Colombo 10")
+st.sidebar.caption("Email : reigonalmedicalofficer@gmail.com")
+st.sidebar.caption("Dr. S. M. S. S. Senarathne,\n\nCasal Hospital,\n\nDarley Road,\n\nColombo 10")
 
-st.sidebar.warning("Contact on an Emergency Situation")
+st.sidebar.warning("Contact the doctor in an Emergency")
 
 st.sidebar.write('--------------')
 
-st.sidebar.success("Let's monitor the Health status of the Mother")
+st.sidebar.error("Please use this under proper guidance of a medical staff officer!")
 
