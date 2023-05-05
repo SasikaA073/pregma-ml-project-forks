@@ -6,7 +6,7 @@ from PIL import Image
 # from yaml.loader import SafeLoader
 
 st.set_page_config(
-    page_title="PregMa - Mother's Health Monitoring System", 
+    page_title="PregMa App", 
     page_icon="❤️",
     layout="centered",
 )
