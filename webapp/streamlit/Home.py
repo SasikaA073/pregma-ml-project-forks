@@ -7,12 +7,12 @@ from PIL import Image
 
 st.set_page_config(
     page_title="PregMa - Mother's Health Monitoring System", 
-    page_icon="❤️", 
+    page_icon="❤️",
     layout="centered",
 )
 
 st.title("PregMa ❤️")
-st.subheader("Mother's Health Monitoring System")
+st.subheader("Pregnant mother's Health Monitoring System")
 
 # Load image
 logo = Image.open('logo.png')
