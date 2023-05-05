@@ -12,7 +12,7 @@ __pycache__/
 *.so
 
 # space file
-.space
+
 
 # Distribution / packaging
 .Python
@@ -128,7 +128,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+
 .venv
 env/
 venv/

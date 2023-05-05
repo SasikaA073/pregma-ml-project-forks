@@ -30,7 +30,7 @@ class Patient:
         self.predicted_result[month] = predicted_result
 
 
-    # function to convert data to a dictionary
+    # function to convert data to 
     def to_dict(self):
         return {
             "id": self.id,

@@ -5,8 +5,9 @@ from classes import Patient
 
 
 # Load your Deta project key from an environment variable
-load_dotenv(".env")
-DETA_KEY = os.getenv('DETA_PROJECT_KEY') 
+# load_dotenv(".env")
+# DETA_KEY = os.getenv('DETA_PROJECT_KEY') 
+DETA_KEY = "d0E7NcjK5X8P_RVUiBBKMe36JY7P9pen6WsDBawji3GTM"
 
 
 # Initialize Deta with a project key
