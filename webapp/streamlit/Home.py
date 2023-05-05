@@ -1,4 +1,5 @@
 import streamlit as st
+from PIL import Image
 
 # import streamlit_authenticator as stauth
 # import yaml
@@ -12,7 +13,12 @@ st.set_page_config(
 
 st.title("PregMa ❤️")
 st.subheader("Mother's Health Monitoring System")
-st.write('--------------')
+
+# Load image
+logo = Image.open('logo.png')
+
+# Display image using Streamlit
+st.image(logo)
 
 # Create a login/logout widget
 # with open('config.yaml') as file:
