@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\Santhusha\OneDrive\Desktop\Model\project\webapp\streamlit\hack"
+VIRTUAL_ENV="D:\Unity_intellihack3\webapp\streamlit\hack"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
