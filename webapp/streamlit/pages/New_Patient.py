@@ -65,7 +65,7 @@ with st.form(key='reg_form'):
 
         # Get the current date
         
-        date = datetime.datetime.now().date()
+        date = str(datetime.datetime.now().date())
 
         # write to the database
         month_data = {systolicBP, diastolicBP, blood_sugar, body_temp, heart_rate}
