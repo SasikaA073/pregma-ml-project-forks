@@ -1,7 +1,7 @@
 import streamlit as st
 # import streamlit_authenticator as stauth
-import yaml
-from yaml.loader import SafeLoader
+# import yaml
+# from yaml.loader import SafeLoader
 
 st.set_page_config(
     page_title="PregMa - Mother's Health Monitoring System", 
