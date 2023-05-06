@@ -92,7 +92,7 @@ with st.form(key='pred_form'):
         elif pred[0] == 2:
             st.error("High Risk")
 
-st.sidebar.success("Let's monitor the Health status of the Mother")
+# st.sidebar.success("Let's monitor the Health status of the Mother")
 
-st.sidebar.subheader("Contact Us")
-st.sidebar.warning("Let's monitor the Health status of the Mother")
+# st.sidebar.subheader("Contact Us")
+# st.sidebar.warning("Let's monitor the Health status of the Mother")
