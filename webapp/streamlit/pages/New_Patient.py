@@ -90,9 +90,6 @@ with st.form(key='reg_form'):
     submit_button = st.form_submit_button(label='Submit')
 
     if submit_button:
-        
-        st.success(f"Mother {patient_id} Registered Successfully".format(first_name))
-        # st.balloons()
         st.write("First Name: ", first_name)
         st.write("Last Name: ", last_name)
         st.write("Age: ", age)
@@ -100,15 +97,10 @@ with st.form(key='reg_form'):
         st.write("Mobile Number: ", mobile_number)
 
         # Get the current date
-        
         date = str(datetime.datetime.now().date())
 
         # write to the database
         insert_patient(patient_id, first_name, last_name, nic, age, blood_group, mobile_number)
-
         st.success(f"{patient_id} Mother registered Successfully")
              
-    
-
-
     st.sidebar.success("Let's start monitering after the Registration")
