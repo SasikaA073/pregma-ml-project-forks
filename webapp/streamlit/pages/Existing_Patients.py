@@ -81,16 +81,18 @@ with st.form(key='pred_form'):
         st.write("Heart Rate (in BPM): ", heart_rate)
         st.write("Month: ", month)
 
-        
-        st.success(f"Mother {patient_id}'s Month {month} results updated Successfully")
-        pred = [0,1,2]
-        time.sleep(2)
-        if pred[0] == 0:
-            st.success("Low Risk")
-        elif pred[0] == 1:
-            st.warning("Medium Risk")
-        elif pred[0] == 2:
-            st.error("High Risk")
+        if systolicBP!="" and diastolicBP!="" and blood_sugar!="" and body_temp!="" and heart_rate!="" and month!="":
+            st.success(f"Mother {patient_id}'s Month {month} results updated Successfully")
+            pred = [0,1,2]
+            time.sleep(2)
+            if pred[0] == 0:
+                st.success("Low Risk")
+            elif pred[0] == 1:
+                st.warning("Medium Risk")
+            elif pred[0] == 2:
+                st.error("High Risk")
+        else :
+            st.error("Please fill all the fields")
 
 # st.sidebar.success("Let's monitor the Health status of the Mother")
 
