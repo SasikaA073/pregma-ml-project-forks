@@ -1,3 +1,4 @@
+# IMPORT LIBRARIES
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -6,141 +7,109 @@ import os
 from dotenv import load_dotenv
 from classes import Patient
 import pickle
-from database import * 
+from database2 import * 
 
-# Load your Deta project key from an environment variable
-# load_dotenv(".env")
-# DETA_KEY = os.getenv('DETA_PROJECT_KEY') 
+
 DETA_KEY = "d0E7NcjK5X8P_RVUiBBKMe36JY7P9pen6WsDBawji3GTM"
 
 # Initialize Deta with a project key
 deta = Deta(DETA_KEY)
 
-# create a DB and connect it
+# create databses from month 1 to 6
+
 patients_db = deta.Base("patients_db")
 
-# a list of patients data
-all_patients_details = get_all_patients()
-
-patient_ids = []
-patient_first_names = []
-patient_last_names = []
-patient_nics = []
-patient_ages = []
-patient_blood_groups = []
-patient_mobile_numbers = []
-
-patient_systolicBPs_1 = []
-patient_diastolicBPs_1 = []
-patient_blood_sugars_1 = []
-patient_body_temps_1 = []
-patient_heart_rates_1 = []
-patient_predictions_1 = []
-patient_dates_1 = []
-
-for i, dict in enumerate(all_patients_details):
-    patient_ids.append(dict["key"])
-    patient_first_names.append(dict["first_name"])
-    patient_last_names.append(dict["last_name"])
-    patient_nics.append(dict["nic"])
-    patient_ages.append(dict["age"])
-    patient_blood_groups.append(dict["blood_group"])
-    patient_mobile_numbers.append(dict["mobile_number"])
-
-    patient_systolicBPs_1.append(dict["systolicBP"])
-    patient_diastolicBPs_1.append(dict["diastolicBP"])
-    patient_blood_sugars_1.append(dict["blood_sugar"])
-    patient_body_temps_1.append(dict["body_temp"])
-    patient_heart_rates_1.append(dict["heart_rate"])
-    patient_predictions_1.append(dict["prediction"])
-    # patient_dates_1.append(dict["date"])
-
-
-
+# Streamlit interface
 st.set_page_config(
+<<<<<<< HEAD
+    page_title="PregMa - Mother's Health Monitoring System",
+    page_icon="❤️",
+=======
     page_title="PregMa - Mother's Health Monitoring System", 
-    page_icon="❤️", 
+    page_icon="icon.png", 
+>>>>>>> 31f0616b326e1dc5a983183af1c6320f41278273
     layout="centered",
 )
 
-# Define the page title
-st.title("Patient's Dashboard")
+st.title("Nurse Dashboard")
 
 
-# Define the column names
-columns_1 = ['Patient ID', 'NIC',"First name", "Last name",
-             "Age", "Blood Group", 'Mobile Number',"month1 systolic blood pressure",
-             "month1 diastolic blood pressure", "month1 blood sugar", "month1 body temperature",
-             "month1 heart rate", "month1 prediction"]
+# a list of patients data
+all_patients_details = get_all_patients()
+all_patients_details = pd.DataFrame(all_patients_details)
 
-# Create a sample data frame
-data = {
-    'Patient ID': patient_ids,
-    'NIC': patient_nics,
-    "First name": patient_first_names,
-    "Last name": patient_last_names,
-    "Age": patient_ages,
-    "Blood Group": patient_blood_groups,
-    'Mobile Number': patient_mobile_numbers,
+# change the dataframe column order
+all_patients_details = all_patients_details[['key', 'first_name', 'last_name', 'age', 'blood_group','nic','mobile_number']]
+# all_patients_details = all_patients_details['key', 'first_name', 'last_name', 'age']
 
-    "month1 systolic blood pressure": patient_systolicBPs_1,
-    "month1 diastolic blood pressure": patient_diastolicBPs_1,
-    "month1 blood sugar": patient_blood_sugars_1,
-    "month1 body temperature": patient_body_temps_1,
-    "month1 heart rate": patient_heart_rates_1,
-    "month1 prediction": patient_predictions_1,
-    # "month1 date": patient_dates_1,
-    }
+# display all details of all patients in a table
+st.markdown("## All Patients")
+st.dataframe(all_patients_details)
 
-# if one record is selected, display the details of that record
-# selected_indices = st.multiselect('Select rows:', patient_ids.index)
+# a form to choose a patient from the list of patients
+st.markdown("## Select a patient")
 
-df = pd.DataFrame(data)
+with st.form(key='patient_id_form'):
+    # Choose the patient id that the nurse wants to view
+    option = st.selectbox(
+        'Select a patient',
+         all_patients_details['key'])
+    
 
-# Display the table
-st.table(df[columns_1])
+    
+    submit_button = st.form_submit_button(label='Select')
 
-st.divider()
+    if submit_button:
+        
 
-st.subheader(f"Mother 's Health Status")
+        # get patient details
+        patient_dict = get_patient(option)
+        patient_name = patient_dict["first_name"] + " " + patient_dict["last_name"]
+        patient_blood_group = patient_dict["blood_group"]
+        # display clicked option 
+        st.write('You selected:', option)
+        st.markdown(f"Patient Name :{patient_name}")
+        st.markdown(f"Patient Blood Group :{patient_blood_group}")
 
-# Define the columns for the table
-columns = ['Patient\'s ID', 'NIC', 'First name', 'Last name', 'Mobile Number', 'Month', 'Current predicted Risk Level']
 
-# Define a function to get the data for the table
-def get_data():
-    return [{'Patient\'s ID': 'p014', 'NIC': '1244545366', 'First name': 'Piyumi', 'Last name': 'Rathnayake', 'Mobile Number': '1245363636', 'Month': 1, 'Current predicted Risk Level': 'Medium'}]
+        # display patient details in a table for months from 1 to 6
+        st.markdown("## Patient Details")
 
-# Display the table
-st.table(pd.DataFrame(get_data(), columns=columns))
+        # get patient object
+        patient_id = patient_dict["key"]
+        
+        # get all months details from month 1 to 6
+        month1_dict = get_month_data(patient_id, 1)
+        month2_dict = get_month_data(patient_id, 2)
+        month3_dict = get_month_data(patient_id, 3)
+        month4_dict = get_month_data(patient_id, 4)
+        month5_dict = get_month_data(patient_id, 5)
+        month6_dict = get_month_data(patient_id, 6)
 
-st.subheader("Current Health Report")
-# Define the columns for the table
-columns = ['Month', 'Predicted Status', 'Actual Status']
+        # create a dataframe with all the months data
 
-# Define the data for the table
-data = [['1', 'Medium Risk', 'Medium Risk'],
-    ['2', 'Medium Risk', 'Low Risk'],
-    ['3', 'Low Risk', 'Low Risk'],
-    ['4', 'High Risk', 'Medium Risk']
-]
+        # Assuming that all the months data has been given.
+        df = pd.DataFrame({
+            "Month": [1, 2, 3, 4, 5, 6],
+            "Blood Sugar (mmol/L)": [month1_dict["blood_sugar"], month2_dict["blood_sugar"], month3_dict["blood_sugar"], month4_dict["blood_sugar"], month5_dict["blood_sugar"], month6_dict["blood_sugar"]],
+            "Systolic BP (mm Hg)": [month1_dict["systolicBP"], month2_dict["systolicBP"], month3_dict["systolicBP"], month4_dict["systolicBP"], month5_dict["systolicBP"], month6_dict["systolicBP"]],
+            "Diastolic BP (mm Hg)": [month1_dict["diastolicBP"], month2_dict["diastolicBP"], month3_dict["diastolicBP"], month4_dict["diastolicBP"], month5_dict["diastolicBP"], month6_dict["diastolicBP"]],
+            "Body Temperature (°C)": [month1_dict["body_temp"], month2_dict["body_temp"], month3_dict["body_temp"], month4_dict["body_temp"], month5_dict["body_temp"], month6_dict["body_temp"]],
+            "Heart Rate (bpm)": [month1_dict["heart_rate"], month2_dict["heart_rate"], month3_dict["heart_rate"], month4_dict["heart_rate"], month5_dict["heart_rate"], month6_dict["heart_rate"]],
+            "Predicted Risk Level": [month1_dict["prediction"], month2_dict["prediction"], month3_dict["prediction"], month4_dict["prediction"], month5_dict["prediction"], month6_dict["prediction"]],
+            
+            # Add sample values for Actual Risk Level
+            "Actual Risk Level": [1, 2, 2, 1, 2, 2]
 
-data_plot = [['1', '1', '1'],
-    ['2', '1', '0'],
-    ['3', '1', '1'],
-    ['4', '2', '1']
-]
+        })
 
-st.table(pd.DataFrame(data, columns=columns))
+        # display the dataframe
+        st.dataframe(df)
 
-# Display the table
-df = pd.DataFrame(data_plot, columns=columns)
+        # display a line chart with all the months data
+        fig = px.line(df, x="Month", y=["Blood Sugar (mmol/L)", "Systolic BP (mm Hg)", "Diastolic BP (mm Hg)", "Body Temperature (°C)", "Heart Rate (bpm)"], title="Patient Health History")
+        st.plotly_chart(fig)
 
-# Create a line chart for the "Predicted Status" column
-fig_pred = px.line(df, x='Month', y=['Predicted Status', 'Actual Status'])
-
-# Create a line chart for the "Actual Status" column
-# fig_act = px.line(df, x='Month', y='Actual Status')
-
-# Display the charts using streamlit.plotly_chart()
-st.plotly_chart(fig_pred)
+        # display a bar chart with all the months data
+        fig = px.bar(df, x="Month", y=["Predicted Risk Level", "Actual Risk Level"], title="Patient Risk Level History")
+        st.plotly_chart(fig)
