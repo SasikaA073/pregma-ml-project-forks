@@ -109,7 +109,7 @@ columns = ['Patient\'s ID', 'NIC', 'First name', 'Last name', 'Mobile Number', '
 
 # Define a function to get the data for the table
 def get_data():
-    return [{'Patient\'s ID': '1', 'NIC': '1234567890', 'First name': 'John', 'Last name': 'Doe', 'Mobile Number': '1234567890', 'Month': 2, 'Current predicted Risk Level': 'High'}]
+    return [{'Patient\'s ID': 'p012', 'NIC': '1234567890', 'First name': 'Piyumi', 'Last name': 'samaranayake', 'Mobile Number': '1234567890', 'Month': 1, 'Current predicted Risk Level': 'High'}]
 
 # Display the table
 st.table(pd.DataFrame(get_data(), columns=columns))
