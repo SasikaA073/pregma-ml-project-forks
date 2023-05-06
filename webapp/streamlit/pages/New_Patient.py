@@ -9,7 +9,7 @@ ml_model_name = "./month1_model.pkl"
 ml_model = pickle.load(open(ml_model_name, 'rb'))
 
 # A dictionary to map the output of the model to the risk level
-risk_level_dict = {1:"Low risk", 2:"Medium risk", 3:"High risk"}
+risk_level_dict = {0:"Low risk", 1:"Medium risk", 2:"High risk"}
 
 st.set_page_config(
     page_title="PregMa - Mother's Health Monitoring System", 
@@ -51,7 +51,7 @@ with st.form(key='reg_form'):
         # Predict Data
         X_data = (age, systolicBP, diastolicBP, blood_sugar, body_temp, heart_rate)
         pred = ml_model.predict([X_data])
-        prediction = risk_level_dict[pred[0]]
+        prediction = risk_level_dict[int(pred[0])]
         
         if pred[0] == 0:
             st.success("Low Risk")
