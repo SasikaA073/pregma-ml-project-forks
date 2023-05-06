@@ -30,22 +30,16 @@
 - (https://archive.ics.uci.edu/ml/datasets.php)
 - https://archive.ics.uci.edu/ml/datasets/Diabetes *Timeseries dataset*
 - https://archive.ics.uci.edu/ml/datasets/Breast+Cancer
-- 
+
 
 
 ## Project Setup
 ### Web app tech stack
-* Flask
-* Vue JS
-* Bootstrap JS 
-NOTE: Frontend can be changed arbitarily
-
-### Model tech stack 
-* Vertex AI
-* Heroku 
-* PyTorch
-* Tensorflow
-* Pandas
+* Streamlit - frontend & backend
+* Detaspace - database
+* sklearn - ML model development
+* pandas - data cleaning
+* plotly - visualisation
 
 Enter the detailed info about project setup here.
 
@@ -54,23 +48,19 @@ Enter the detailed info about project setup here.
 Clone the repository from github.
 
 ```sh
-git clone https://github.com/SpeechOlympiadXV/speecholympiadxv.github.io.git
+git clone https://github.com/Santhusha-bit/Unity_intellihack3.git
 ```
 
+Development 
 
-Enter the details of how to run the project here
-## Development
-
-...
-
-### Branches
-
-Note that the master branch is protected and cannot be directly pushed to. **Always work on a 
-feature/component branch and make a pull request against master.**
-
-**Note that the gh-pages branch is only for deploying. Do not work on this branch**
+1. Go to `webapp/streamlit` directory and run this command
+```sh
+$ cd webapp/streamlit
+$ streamlit run Home.py
+```
 
 ## Deploying
 
-...
+not yet developed.
+earlier stage of the web app has been deployed in the streamlit share cloud.
 
