@@ -3,6 +3,7 @@ import easyocr as ocr
 from PIL import Image
 import numpy as np
 import time
+import datetime
 from database2 import *
 # IMPORT LIBRARIES
 import streamlit as st
@@ -16,6 +17,8 @@ import pickle
 from database2 import * 
 import random
 
+#Risk level dictionary 
+risk_level_dict = {0: "Low", 1: "Medium", 2: "High"}
 
 DETA_KEY = "d0E7NcjK5X8P_RVUiBBKMe36JY7P9pen6WsDBawji3GTM"
 
@@ -180,9 +183,30 @@ with st.form(key='pred_form'):
     submit_button = st.form_submit_button(label='Update')
 
     if submit_button:
+        # get the age from the patient_id from patients database
+        age = int(get_patient(patient_id)["age"])
+
+        # Load the machine learning model pickel file
+        model = pickle.load(open("./month1_model.pkl", 'rb'))
+
+
+        # Prediction 
+        pred = model.predict([[age, systolicBP, diastolicBP, blood_sugar, body_temp, heart_rate]])
+        prediction = risk_level_dict[pred[0]]
+
+        st.markdown(f"## Prediction: ")
+        if prediction == 0:
+            st.success("Low risk level")
+        elif prediction == 1:
+            st.warning("Medium risk level")
+        else:
+            st.error("High risk level -> Please direct the patient to a doctor immediately.")
         
+        # Get the current date
+        date = str(datetime.datetime.now().date())
+
         # Write data to the month table
-        add_month_data(patient_id, systolicBP, diastolicBP, blood_sugar, body_temp, heart_rate, month_no)
+        add_month_data(patient_id, systolicBP, diastolicBP, blood_sugar, body_temp, heart_rate, prediction, date)
 
         # write random data to
         # add values with random values to the month databases for patient p002
@@ -195,9 +219,7 @@ with st.form(key='pred_form'):
                 # add_month_data(patient_id,i,random.randint(120,140),random.randint(80,90),random.randint(80,90),random.randint(37,38),random.randint(80,90),random.randint(1,3),str(datetime.datetime.now().date()))
             # delete_month_data("p002",i) 
         
-        # get the age from the patient_id from patients database
-        age = int(get_patient(patient_id)["age"])
-
+        
 
 
 
