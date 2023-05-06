@@ -59,7 +59,7 @@ for i, dict in enumerate(all_patients_details):
 
 st.set_page_config(
     page_title="PregMa - Mother's Health Monitoring System", 
-    page_icon="❤️", 
+    page_icon="icon.png", 
     layout="centered",
 )
 

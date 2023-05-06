@@ -16,7 +16,7 @@ risk_level_dict = {0:"Low risk", 1:"Medium risk", 2:"High risk"}
 
 st.set_page_config(
     page_title="PregMa - Mother's Health Monitoring System", 
-    page_icon="❤️", 
+    page_icon="icon.png", 
     layout="centered",
 )
 
