@@ -56,9 +56,9 @@ with st.form(key='reg_form'):
         if pred[0] == 0:
             st.success("Low Risk")
         elif pred[0] == 1:
-            st.warning("Medium Risk")
+            st.warning("Medium Risk : \nGive relevant Recommendations!")
         elif pred[0] == 2:
-            st.error("High Risk")
+            st.error(f"High Risk : \nPlease direct to a Medical Officier immediately.")
 
 
         st.write("Prediction: ", prediction)
