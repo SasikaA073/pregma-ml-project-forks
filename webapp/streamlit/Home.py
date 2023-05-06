@@ -1,5 +1,7 @@
 import streamlit as st
+from pathlib import Path
 from PIL import Image
+import streamlit_authenticator as stauth
 
 # import streamlit_authenticator as stauth
 # import yaml
@@ -12,47 +14,53 @@ st.set_page_config(
 )
 
 st.title("PregMa ❤️")
-st.subheader("Pregnant mother Health Monitoring System")
 
-# Load image
-logo = Image.open('logo.png')
+# User Authentication    
+credentials = {
+    "usernames":{
+        "eranga":{
+            "name":"Dr. Eranga",
+            "password": '$2b$12$JtByid2cjmgIfjF3/WjQkOpOYadkoWbv1yLtEc3XpAwaKOqeVY2tS'
+            },
+        "hiru":{
+            "name":"Dr. Hiru",
+            "password": '$2b$12$.0tFREKSvKXisqhwZt0AP.S9lqYlG8QYA0XpDUqtnnqRFokia64XO'
+            }            
+        }
+    }
 
-# Display image using Streamlit
-st.image(logo)
+authenticator = stauth.Authenticate(credentials, "app_home", "auth", cookie_expiry_days=30)
 
-# Create a login/logout widget
-# with open('config.yaml') as file:
-#     config = yaml.load(file, Loader=SafeLoader)
-
-# authenticator = stauth.Authenticate(
-#     config['credentials'],
-#     config['cookie']['name'],
-#     config['cookie']['key'],
-#     config['cookie']['expiry_days'],
-#     config['preauthorized']
-# )
-
-# name, authentication_status, username = authenticator.login('Login', 'main')
- 
-# # Authenticate the user
-# if st.session_state["authentication_status"]:
-#     authenticator.logout('Logout', 'main', key='unique_key')
-#     st.write(f'Welcome *{st.session_state["name"]}*')
-#     st.title('Some content')
-# elif st.session_state["authentication_status"] is False:
-#     st.error('Username/password is incorrect')
-# elif st.session_state["authentication_status"] is None:
-#     st.warning('Please enter your username and password')
+name, authentication_status, username = authenticator.login('Login', 'main')
 
 
-st.sidebar.subheader("Contact Us")
+if authentication_status == False:
+    st.error('Username/password is incorrect')
 
-st.sidebar.caption("Email : reigonalmedicalofficer@gmail.com")
-st.sidebar.caption("Dr. S. M. S. S. Senarathne,\n\nCasal Hospital,\n\nDarley Road,\n\nColombo 10")
+if authentication_status == None:
+    st.warning('Please enter your username and password')
 
-st.sidebar.warning("Contact the doctor in an Emergency")
+if authentication_status:
 
-st.sidebar.write('--------------')
+    authenticator.logout('Logout', 'sidebar', key='unique_key')
+    st.sidebar.write(f'Welcome *{name}*!')
 
-st.sidebar.error("Please use this under proper guidance of a medical staff officer!")
+    st.subheader("Pregnant mother Health Monitoring System")
+
+    # Load image
+    logo = Image.open('logo.png')
+
+    # Display image using Streamlit
+    st.image(logo)
+
+    st.sidebar.subheader("Contact Us")
+
+    st.sidebar.caption("Email : reigonalmedicalofficer@gmail.com")
+    st.sidebar.caption("Dr. S. M. S. S. Senarathne,\n\nCastle Hospital,\n\nDarley Road,\n\nColombo 10")
+
+    st.sidebar.warning("Contact the doctor in an Emergency")
+
+    st.sidebar.write('--------------')
+
+    st.sidebar.error("Please use this under proper guidance of a medical staff officer!")
 
