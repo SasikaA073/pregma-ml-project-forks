@@ -225,15 +225,7 @@ with st.form(key='pred_form'):
 
         if systolicBP!="" and diastolicBP!="" and blood_sugar!="" and body_temp!="" and heart_rate!="" and age!="":
             st.success(f"Mother {patient_id}'s Month {month_no} results updated Successfully")
-            pred = [0,1,2]
-            time.sleep(2)
-            if pred[0] == 0:
-                st.success("Low Risk")
-            elif pred[0] == 1:
-                st.warning("Medium Risk")
-            elif pred[0] == 2:
-                st.error("High Risk")
-
+            
             st.markdown("## Diagnosis")
             st.markdown(getdiagnosis({"systolicBP":float(systolicBP), 
                                    "diastolicBP":float(diastolicBP), 
@@ -244,7 +236,3 @@ with st.form(key='pred_form'):
         else :
             st.error("Please fill all the fields")
 
-# st.sidebar.success("Let's monitor the Health status of the Mother")
-
-# st.sidebar.subheader("Contact Us")
-# st.sidebar.warning("Let's monitor the Health status of the Mother")
