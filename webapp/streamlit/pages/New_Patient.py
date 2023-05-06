@@ -1,4 +1,7 @@
 import streamlit as st
+import easyocr as ocr  
+from PIL import Image
+import numpy as np
 from classes import Patient
 from database import *
 import pickle
@@ -19,20 +22,82 @@ st.set_page_config(
 
 st.title("Register a New Mother")
 
+
+st.markdown("Optical Character Recognizer")
+
+image = st.file_uploader(label = "Upload your image here autofill or you can fill the form",type=['png','jpg','jpeg'])
+
+@st.cache_data
+def load_model(): 
+    reader = ocr.Reader(['en'],model_storage_directory='.')
+    return reader 
+
+# Initialize the variables
+ocr_first_name = ""
+ocr_last_name = ""
+ocr_nic = ""
+ocr_mobile_number = ""
+ocr_age = ""
+ocr_blood_group = "A+"
+ocr_systolicBP = ""
+ocr_diastolicBP = ""
+ocr_blood_sugar = ""
+ocr_body_temp = ""
+ocr_heart_rate = ""
+
+reader = load_model()
+if image is not None:
+
+    input_image = Image.open(image) #read image
+    st.image(input_image) #display image
+
+    with st.spinner("🤖 AI is at Work! "):
+        
+
+        result = reader.readtext(np.array(input_image))
+
+        result_text = [] #empty list for results
+
+
+        for text in result:
+            result_text.append(text[1])
+
+
+        try:
+            ocr_first_name = result_text[0].split(" ")[-1]
+            ocr_last_name = result_text[1].split(" ")[-1]
+            ocr_nic = result_text[2].split(" ")[-1]
+            ocr_mobile_number = result_text[3].split(" ")[-1]
+            ocr_age = result_text[4].split(" ")[-1]
+            ocr_blood_group = result_text[5].split(" ")[-1]
+            ocr_systolicBP = result_text[6].split(" ")[-1]
+            ocr_diastolicBP = result_text[7].split(" ")[-1]
+            ocr_blood_sugar = result_text[8].split(" ")[-1]
+            ocr_body_temp = result_text[9].split(" ")[-1]
+            ocr_heart_rate = result_text[10].split(" ")[-1]
+        except:
+            pass
+        
+    st.warning("Please check the autofill data and fill the form if there are any missing data")
+else:
+    st.write("Upload an Image")
+
+
+
 with st.form(key='reg_form'):
     patient_id = st.text_input(label='Patient ID').lower()
-    first_name = st.text_input(label='First Name')
-    last_name = st.text_input(label='Last Name')
-    nic = st.text_input(label='NIC')
-    age = st.text_input(label='Age')
-    blood_group = st.selectbox(label='Blood Group', options=['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'])
-    mobile_number = st.text_input(label='Mobile Number')
+    first_name = st.text_input(label='First Name', value=ocr_first_name)
+    last_name = st.text_input(label='Last Name', value=ocr_last_name)
+    nic = st.text_input(label='NIC', value=ocr_nic)
+    mobile_number = st.text_input(label='Mobile Number', value=ocr_mobile_number)
 
-    systolicBP = st.text_input(label='Systolic Blood Pressure')
-    diastolicBP = st.text_input(label='Diastolic Blood Pressure')
-    blood_sugar = st.text_input(label='Blood Sugar Level')
-    body_temp = st.text_input(label='Body Temperature (in Celsius))')
-    heart_rate = st.text_input(label='Heart Rate (in BPM)')
+    age = st.text_input(label='Age', value=ocr_age)
+    blood_group = st.selectbox(label='Blood Group', options=['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'])
+    systolicBP = st.text_input(label='Systolic Blood Pressure', value=ocr_systolicBP)
+    diastolicBP = st.text_input(label='Diastolic Blood Pressure',  value=ocr_diastolicBP)
+    blood_sugar = st.text_input(label='Blood Sugar Level', value=ocr_blood_sugar)
+    body_temp = st.text_input(label='Body Temperature (in Celsius))',  value=ocr_body_temp)
+    heart_rate = st.text_input(label='Heart Rate (in BPM)', value=ocr_heart_rate)
     month = st.selectbox(label='Month', options=['1'])
     # month = 1
 
