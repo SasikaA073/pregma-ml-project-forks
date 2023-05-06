@@ -20,9 +20,8 @@ deta = Deta(DETA_KEY)
 patients_db = deta.Base("patients_db")
 
 # Streamlit interface
+# Streamlit interface 
 st.set_page_config(
-    page_title="PregMa - Mother's Health Monitoring System",
-    page_icon="icon.png",
     page_title="PregMa - Mother's Health Monitoring System", 
     page_icon="icon.png", 
     layout="centered",
@@ -66,7 +65,7 @@ with st.form(key='patient_id_form'):
         # display clicked option 
         st.write('You selected:', option)
         st.markdown(f"Patient Name :{patient_name}")
-        st.markdown(f"Patient Blood Group :{patient_blood_group}")
+        st.markdown(f"Patient Blood Group :A{patient_blood_group}")
 
 
         # display patient details in a table for months from 1 to 6
