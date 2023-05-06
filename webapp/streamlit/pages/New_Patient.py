@@ -102,5 +102,3 @@ with st.form(key='reg_form'):
         # write to the database
         insert_patient(patient_id, first_name, last_name, nic, age, blood_group, mobile_number)
         st.success(f"{patient_id} Mother registered Successfully")
-             
-    st.sidebar.success("Let's start monitering after the Registration")
