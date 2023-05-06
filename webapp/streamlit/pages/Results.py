@@ -206,7 +206,7 @@ with st.form(key='pred_form'):
         date = str(datetime.datetime.now().date())
 
         # Write data to the month table
-        add_month_data(patient_id, systolicBP, diastolicBP, blood_sugar, body_temp, heart_rate, prediction, date)
+        add_month_data(patient_id,month_no, systolicBP, diastolicBP, blood_sugar, body_temp, heart_rate, prediction, date)
 
         # write random data to
         # add values with random values to the month databases for patient p002
