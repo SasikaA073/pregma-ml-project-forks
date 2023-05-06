@@ -106,21 +106,6 @@ with st.form(key='reg_form'):
         st.write("Blood Group: ", blood_group)
         st.write("Mobile Number: ", mobile_number)
 
-        # Predict Data
-        X_data = (age, systolicBP, diastolicBP, blood_sugar, body_temp, heart_rate)
-        pred = ml_model.predict([X_data])
-        prediction = risk_level_dict[int(pred[0])]
-        
-        if pred[0] == 0:
-            st.success("Low Risk")
-        elif pred[0] == 1:
-            st.warning("Medium Risk : \nGive relevant Recommendations!")
-        elif pred[0] == 2:
-            st.error(f"High Risk : \nPlease direct to a Medical Officier immediately.")
-
-
-        st.write("Prediction: ", prediction)
-
         # Get the current date
         
         date = str(datetime.datetime.now().date())
