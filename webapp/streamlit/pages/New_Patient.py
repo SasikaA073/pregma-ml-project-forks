@@ -52,16 +52,12 @@ if image is not None:
     st.image(input_image) #display image
 
     with st.spinner("🤖 AI is at Work! "):
-        
-
         result = reader.readtext(np.array(input_image))
-
         result_text = [] #empty list for results
 
 
         for text in result:
             result_text.append(text[1])
-
 
         try:
             ocr_first_name = result_text[0].split(" ")[-1]
