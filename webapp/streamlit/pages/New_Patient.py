@@ -3,7 +3,7 @@ import easyocr as ocr
 from PIL import Image
 import numpy as np
 from classes import Patient
-from database import *
+from database2 import *
 import pickle
 import datetime
 
@@ -134,7 +134,7 @@ with st.form(key='reg_form'):
 
         # write to the database
         month_data = {systolicBP, diastolicBP, blood_sugar, body_temp, heart_rate}
-        insert_patient(patient_id, first_name, last_name, nic, age, blood_group, mobile_number, month, systolicBP, diastolicBP, blood_sugar, body_temp, heart_rate, prediction, date)
+        insert_patient(patient_id, first_name, last_name, nic, age, blood_group, mobile_number)
 
         st.success(f"{patient_id} Mother's Month {month} results updated Successfully")
         # st.balloons()
