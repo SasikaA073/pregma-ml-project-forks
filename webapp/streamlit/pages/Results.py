@@ -37,6 +37,8 @@ st.set_page_config(
 
 st.title("User Profile")
 
+st.markdown("Optical Character Recognizer")
+
 image = st.file_uploader(label = "Upload your image here autofill or you can fill the form",type=['png','jpg','jpeg'])
 
 @st.cache_data
@@ -166,7 +168,7 @@ def getdiagnosis(inputDict):
                     outputString += "* Patient is somewhat older. This can cause low birth weights of child, pre mature births and other pregnancy complications\n"
         
         if outputString == "":
-            outputString = "You are healthy. Please maintain your health."
+            outputString = ""
     return outputString
 
 with st.form(key='pred_form'):
@@ -217,14 +219,10 @@ with st.form(key='pred_form'):
                 pass
                 # add_month_data(patient_id,i,random.randint(120,140),random.randint(80,90),random.randint(80,90),random.randint(37,38),random.randint(80,90),random.randint(1,3),str(datetime.datetime.now().date()))
             # delete_month_data("p002",i) 
-        
-        
-
-
 
         if systolicBP!="" and diastolicBP!="" and blood_sugar!="" and body_temp!="" and heart_rate!="" and age!="":
             st.success(f"Mother {patient_id}'s Month {month_no} results updated Successfully")
-            
+
             st.markdown("## Diagnosis")
             st.markdown(getdiagnosis({"systolicBP":float(systolicBP), 
                                    "diastolicBP":float(diastolicBP), 
