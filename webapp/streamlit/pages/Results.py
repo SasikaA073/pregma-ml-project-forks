@@ -34,8 +34,6 @@ st.set_page_config(
 
 st.title("User Profile")
 
-st.markdown("Optical Character Recognizer")
-
 image = st.file_uploader(label = "Upload your image here autofill or you can fill the form",type=['png','jpg','jpeg'])
 
 @st.cache_data
