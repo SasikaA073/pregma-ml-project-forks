@@ -21,13 +21,10 @@ patients_db = deta.Base("patients_db")
 
 # Streamlit interface
 st.set_page_config(
-<<<<<<< HEAD
     page_title="PregMa - Mother's Health Monitoring System",
-    page_icon="❤️",
-=======
+    page_icon="icon.png",
     page_title="PregMa - Mother's Health Monitoring System", 
     page_icon="icon.png", 
->>>>>>> 31f0616b326e1dc5a983183af1c6320f41278273
     layout="centered",
 )
 
