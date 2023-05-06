@@ -178,7 +178,7 @@ with st.form(key='pred_form'):
             elif pred[0] == 2:
                 st.error("High Risk")
 
-            st.markdwon("## Diagnosis")
+            st.markdown("## Diagnosis")
             st.markdown(getdiagnosis({"systolicBP":float(systolicBP), 
                                    "diastolicBP":float(diastolicBP), 
                                   "blood_sugar": float(blood_sugar),
