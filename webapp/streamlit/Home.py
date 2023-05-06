@@ -33,7 +33,6 @@ authenticator = stauth.Authenticate(credentials, "app_home", "auth", cookie_expi
 
 name, authentication_status, username = authenticator.login('Login', 'main')
 
-
 if authentication_status == False:
     st.error('Username/password is incorrect')
 
@@ -52,15 +51,5 @@ if authentication_status:
 
     # Display image using Streamlit
     st.image(logo)
-
-    st.sidebar.subheader("Contact Us")
-
-    st.sidebar.caption("Email : reigonalmedicalofficer@gmail.com")
-    st.sidebar.caption("Dr. S. M. S. S. Senarathne,\n\nCastle Hospital,\n\nDarley Road,\n\nColombo 10")
-
-    st.sidebar.warning("Contact the doctor in an Emergency")
-
-    st.sidebar.write('--------------')
-
     st.sidebar.error("Please use this under proper guidance of a medical staff officer!")
 

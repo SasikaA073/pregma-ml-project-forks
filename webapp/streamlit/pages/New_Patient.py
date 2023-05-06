@@ -22,9 +22,6 @@ st.set_page_config(
 
 st.title("Register a New Mother")
 
-
-st.markdown("Optical Character Recognizer")
-
 image = st.file_uploader(label = "Upload your image here autofill or you can fill the form",type=['png','jpg','jpeg'])
 
 @st.cache_data
@@ -52,16 +49,12 @@ if image is not None:
     st.image(input_image) #display image
 
     with st.spinner("🤖 AI is at Work! "):
-        
-
         result = reader.readtext(np.array(input_image))
-
         result_text = [] #empty list for results
 
 
         for text in result:
             result_text.append(text[1])
-
 
         try:
             ocr_first_name = result_text[0].split(" ")[-1]
