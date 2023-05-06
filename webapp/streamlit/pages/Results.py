@@ -3,6 +3,28 @@ import easyocr as ocr
 from PIL import Image
 import numpy as np
 import time
+from database2 import *
+# IMPORT LIBRARIES
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+from deta import Deta
+import os
+from dotenv import load_dotenv
+from classes import Patient
+import pickle
+from database2 import * 
+import random
+
+
+DETA_KEY = "d0E7NcjK5X8P_RVUiBBKMe36JY7P9pen6WsDBawji3GTM"
+
+# Initialize Deta with a project key
+deta = Deta(DETA_KEY)
+
+# create databses from month 1 to 6
+
+patients_db = deta.Base("patients_db")
 
 st.set_page_config(
     page_title="PregMa - Mother's Health Monitoring System", 
@@ -153,22 +175,34 @@ with st.form(key='pred_form'):
     blood_sugar = st.text_input(label='Blood Sugar Level', value=ocr_blood_sugar)
     body_temp = st.text_input(label='Body Temperature (in Celsius))', value=ocr_body_temp)
     heart_rate = st.text_input(label='Heart Rate (in BPM)', value=ocr_heart_rate)
-    month = st.selectbox(label='Month', options=['2', '3', '4', '5', '6'])
+    month_no = st.selectbox(label='Month', options=['1','2', '3', '4', '5', '6'])
 
     submit_button = st.form_submit_button(label='Update')
 
     if submit_button:
-        # st.success("Mother {}'s Month {} results updated Successfully")
-        # st.balloons()
-        st.write("Systolic Blood Pressure: ", systolicBP)   
-        st.write("Diastolic Blood Pressure: ", diastolicBP)
-        st.write("Blood Sugar Level: ", blood_sugar)
-        st.write("Body Temperature (in Celsius): ", body_temp, "°C")
-        st.write("Heart Rate (in BPM): ", heart_rate)
-        st.write("Month: ", month)
+        
+        # Write data to the month table
+        add_month_data(patient_id, systolicBP, diastolicBP, blood_sugar, body_temp, heart_rate, month_no)
 
-        if systolicBP!="" and diastolicBP!="" and blood_sugar!="" and body_temp!="" and heart_rate!="" and month!="":
-            st.success(f"Mother {patient_id}'s Month {month} results updated Successfully")
+        # write random data to
+        # add values with random values to the month databases for patient p002
+        for i in range(1,7):
+            # add random values possible values using random.randint()
+            if i != int(month_no): 
+                add_month_data(patient_id,i,random.randint(120,140),random.randint(80,90),random.randint(80,90),random.randint(37,38),random.randint(80,90),random.randint(1,3),str(datetime.datetime.now().date()))
+            else:
+                pass
+                # add_month_data(patient_id,i,random.randint(120,140),random.randint(80,90),random.randint(80,90),random.randint(37,38),random.randint(80,90),random.randint(1,3),str(datetime.datetime.now().date()))
+            # delete_month_data("p002",i) 
+        
+        # get the age from the patient_id from patients database
+        age = int(get_patient(patient_id)["age"])
+
+
+
+
+        if systolicBP!="" and diastolicBP!="" and blood_sugar!="" and body_temp!="" and heart_rate!="" and age!="":
+            st.success(f"Mother {patient_id}'s Month {month_no} results updated Successfully")
             pred = [0,1,2]
             time.sleep(2)
             if pred[0] == 0:
@@ -184,7 +218,7 @@ with st.form(key='pred_form'):
                                   "blood_sugar": float(blood_sugar),
                                     "body_temp": float(body_temp),
                                       "heart_rate":  float(heart_rate),
-                                        "age": float(month)}))
+                                        "age": float(age)}))
         else :
             st.error("Please fill all the fields")
 

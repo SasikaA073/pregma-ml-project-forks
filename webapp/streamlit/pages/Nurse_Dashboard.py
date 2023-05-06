@@ -81,6 +81,8 @@ with st.form(key='patient_id_form'):
         month5_dict = get_month_data(patient_id, 5)
         month6_dict = get_month_data(patient_id, 6)
 
+        
+
         # create a dataframe with all the months data
 
         # Assuming that all the months data has been given.
