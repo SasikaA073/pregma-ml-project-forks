@@ -1,4 +1,5 @@
 ### Age 
+```
 if age > 40:
 	miscarriage
 	birth defects 
@@ -10,11 +11,12 @@ if age > 40:
 		* Down syndrome 
 			- 1/1250 possibility - if age 25
 			- 1/100 possibility - if age 40
-
+```
 *Age 35 is considered advanced maternal age* 
 
 ___ 
 
+```
 if blood pressure (either systolic or diastolic) > some value :
 			1. *Less blood flow to the placenta*  > fetus might get less oxygen 
 			**low birth weight
@@ -33,6 +35,8 @@ if blood pressure (either systolic or diastolic) > some value :
 		4. **Premature delivery.** 
 
 		5. **Future cardiovascular disease** for mother 
+
+```
 
 ____ 
 There are three stages of high blood pressures,
