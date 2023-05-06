@@ -93,14 +93,7 @@ with st.form(key='reg_form'):
 
     age = st.text_input(label='Age', value=ocr_age)
     blood_group = st.selectbox(label='Blood Group', options=['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'])
-    systolicBP = st.text_input(label='Systolic Blood Pressure', value=ocr_systolicBP)
-    diastolicBP = st.text_input(label='Diastolic Blood Pressure',  value=ocr_diastolicBP)
-    blood_sugar = st.text_input(label='Blood Sugar Level', value=ocr_blood_sugar)
-    body_temp = st.text_input(label='Body Temperature (in Celsius))',  value=ocr_body_temp)
-    heart_rate = st.text_input(label='Heart Rate (in BPM)', value=ocr_heart_rate)
-    month = st.selectbox(label='Month', options=['1'])
-    # month = 1
-
+    
     submit_button = st.form_submit_button(label='Submit')
 
     if submit_button:
@@ -133,20 +126,10 @@ with st.form(key='reg_form'):
         date = str(datetime.datetime.now().date())
 
         # write to the database
-        month_data = {systolicBP, diastolicBP, blood_sugar, body_temp, heart_rate}
         insert_patient(patient_id, first_name, last_name, nic, age, blood_group, mobile_number)
 
         st.success(f"{patient_id} Mother registered Successfully")
-        # st.balloons()
-        # st.write("Systolic Blood Pressure: ")
-        # st.write("Systolic Blood Pressure: ", systolicBP)   
-        # st.write("Diastolic Blood Pressure: ", diastolicBP)
-        # st.write("Blood Sugar Level: ", blood_sugar)
-        # st.write("Body Temperature (in Celsius): ", body_temp)
-        # st.write("Heart Rate (in BPM): ", heart_rate)
-        # st.write("Month: ", month)
-
-        
+             
     
 
 
