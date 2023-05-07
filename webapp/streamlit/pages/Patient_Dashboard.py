@@ -16,80 +16,85 @@ DETA_KEY = "d0E7NcjK5X8P_RVUiBBKMe36JY7P9pen6WsDBawji3GTM"
 deta = Deta(DETA_KEY)
 
 # create databses from month 1 to 6
+try:
+    patients_db = deta.Base("patients_db")
 
-patients_db = deta.Base("patients_db")
+    # Streamlit interface 
+    st.set_page_config(
+        page_title="PregMa - Mother's Health Monitoring System", 
+        page_icon="❤️", 
+        layout="centered",
+    )
 
-# Streamlit interface 
-st.set_page_config(
-    page_title="PregMa - Mother's Health Monitoring System", 
-    page_icon="icon.png", 
-    layout="centered",
-)
-
-st.title("Patient Dashboard")
-
-
-st.markdown("Please enter your username")
-patientFound = False
-
-with st.form(key='patient_id_form'):
-    patient_id = st.text_input(label='Patient ID').lower()
-    
-    submit_button = st.form_submit_button(label='Submit')
-
-    if submit_button:
-        patient_dict = get_patient(patient_id)
-        patientFound = True
-
-        if patient_dict is None:
-            st.error("Patient ID not found")
-            st.stop()
-        else:
-            st.markdown(f"### Welcome {patient_dict['first_name']} {patient_dict['last_name']}!")
-
-if patientFound:
-    # display a table with patient details in the previous months 
-    st.markdown("## History of your health")
-    
-    # display blood group and age in two lines
-    st.markdown(f"**Blood Group:** {patient_dict['blood_group']}  \n**Age:** {patient_dict['age']}")
+    st.title("Patient Dashboard")
 
 
-    # get patient object
-    patient_id = patient_dict["key"]
-    
-    # get all months details from month 1 to 6
-    month1_dict = get_month_data(patient_id, 1)
-    month2_dict = get_month_data(patient_id, 2)
-    month3_dict = get_month_data(patient_id, 3)
-    month4_dict = get_month_data(patient_id, 4)
-    month5_dict = get_month_data(patient_id, 5)
-    month6_dict = get_month_data(patient_id, 6)
+    st.markdown("Please enter your username")
+    patientFound = False
 
-    # create a dataframe with all the months data
-
-    # Assuming that all the months data has been given.
-    df = pd.DataFrame({
-        "Month": [1, 2, 3, 4, 5, 6],
-        "Blood Sugar (mmol/L)": [month1_dict["blood_sugar"], month2_dict["blood_sugar"], month3_dict["blood_sugar"], month4_dict["blood_sugar"], month5_dict["blood_sugar"], month6_dict["blood_sugar"]],
-        "Systolic BP (mm Hg)": [month1_dict["systolicBP"], month2_dict["systolicBP"], month3_dict["systolicBP"], month4_dict["systolicBP"], month5_dict["systolicBP"], month6_dict["systolicBP"]],
-        "Diastolic BP (mm Hg)": [month1_dict["diastolicBP"], month2_dict["diastolicBP"], month3_dict["diastolicBP"], month4_dict["diastolicBP"], month5_dict["diastolicBP"], month6_dict["diastolicBP"]],
-        "Body Temperature (°C)": [month1_dict["body_temp"], month2_dict["body_temp"], month3_dict["body_temp"], month4_dict["body_temp"], month5_dict["body_temp"], month6_dict["body_temp"]],
-        "Heart Rate (bpm)": [month1_dict["heart_rate"], month2_dict["heart_rate"], month3_dict["heart_rate"], month4_dict["heart_rate"], month5_dict["heart_rate"], month6_dict["heart_rate"]],
-        "Predicted Risk Level": [month1_dict["prediction"], month2_dict["prediction"], month3_dict["prediction"], month4_dict["prediction"], month5_dict["prediction"], month6_dict["prediction"]],
+    with st.form(key='patient_id_form'):
+        patient_id = st.text_input(label='Patient ID').lower()
         
-        # Add sample values for Actual Risk Level
-        "Actual Risk Level": [1, 2, 2, 1, 2, 2]
+        submit_button = st.form_submit_button(label='Submit')
 
-    })
+        if submit_button:
+            patient_dict = get_patient(patient_id)
+            patientFound = True
 
-    # display the dataframe
-    st.dataframe(df)
+            if patient_dict is None:
+                st.error("Patient ID not found")
+                st.stop()
+            else:
+                st.markdown(f"### Welcome {patient_dict['first_name']} {patient_dict['last_name']}!")
 
-    # display a line chart with all the months data
-    fig = px.line(df, x="Month", y=["Blood Sugar (mmol/L)", "Systolic BP (mm Hg)", "Diastolic BP (mm Hg)", "Body Temperature (°C)", "Heart Rate (bpm)"], title="Patient Health History")
-    st.plotly_chart(fig)
+    if patientFound:
+        # display a table with patient details in the previous months 
+        st.markdown("## History of your health")
+        
+        # display blood group and age in two lines
+        st.markdown(f"**Blood Group:** {patient_dict['blood_group']}  \n**Age:** {patient_dict['age']}")
 
-    # display a bar chart with all the months data
-    fig = px.bar(df, x="Month", y=["Predicted Risk Level", "Actual Risk Level"], title="Patient Risk Level History")
-    st.plotly_chart(fig)
+
+        # get patient object
+        patient_id = patient_dict["key"]
+        
+        # get all months details from month 1 to 6
+        month1_dict = get_month_data(patient_id, 1)
+        month2_dict = get_month_data(patient_id, 2)
+        month3_dict = get_month_data(patient_id, 3)
+        month4_dict = get_month_data(patient_id, 4)
+        month5_dict = get_month_data(patient_id, 5)
+        month6_dict = get_month_data(patient_id, 6)
+
+        # create a dataframe with all the months data
+
+        # Assuming that all the months data has been given.
+        df = pd.DataFrame({
+            "Month": [1, 2, 3, 4, 5, 6],
+            "Blood Sugar (mmol/L)": [month1_dict["blood_sugar"], month2_dict["blood_sugar"], month3_dict["blood_sugar"], month4_dict["blood_sugar"], month5_dict["blood_sugar"], month6_dict["blood_sugar"]],
+            "Systolic BP (mm Hg)": [month1_dict["systolicBP"], month2_dict["systolicBP"], month3_dict["systolicBP"], month4_dict["systolicBP"], month5_dict["systolicBP"], month6_dict["systolicBP"]],
+            "Diastolic BP (mm Hg)": [month1_dict["diastolicBP"], month2_dict["diastolicBP"], month3_dict["diastolicBP"], month4_dict["diastolicBP"], month5_dict["diastolicBP"], month6_dict["diastolicBP"]],
+            "Body Temperature (°C)": [month1_dict["body_temp"], month2_dict["body_temp"], month3_dict["body_temp"], month4_dict["body_temp"], month5_dict["body_temp"], month6_dict["body_temp"]],
+            "Heart Rate (bpm)": [month1_dict["heart_rate"], month2_dict["heart_rate"], month3_dict["heart_rate"], month4_dict["heart_rate"], month5_dict["heart_rate"], month6_dict["heart_rate"]],
+            "Predicted Risk Level": [month1_dict["prediction"], month2_dict["prediction"], month3_dict["prediction"], month4_dict["prediction"], month5_dict["prediction"], month6_dict["prediction"]],
+            
+            # Add sample values for Actual Risk Level
+            "Actual Risk Level": [1, 2, 2, 1, 2, 2]
+
+        })
+
+        # display the dataframe
+        st.dataframe(df)
+
+        # display a line chart with all the months data
+        fig = px.line(df, x="Month", y=["Blood Sugar (mmol/L)", "Systolic BP (mm Hg)", "Diastolic BP (mm Hg)", "Body Temperature (°C)", "Heart Rate (bpm)"], title="Patient Health History")
+        st.plotly_chart(fig)
+
+        # display a bar chart with all the months data
+        fig = px.bar(df, x="Month", y=["Predicted Risk Level", "Actual Risk Level"], title="Patient Risk Level History")
+        st.plotly_chart(fig)
+
+except Exception as e:
+    
+    st.error("Something went wrong. Please try again later.")
+    st.error(e)
