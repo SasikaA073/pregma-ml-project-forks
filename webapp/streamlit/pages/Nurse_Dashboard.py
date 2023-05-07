@@ -64,7 +64,9 @@ try:
             # display clicked option 
             st.write('You selected:', option)
             st.markdown(f"Patient Name :{patient_name}")
-            st.markdown(f"Patient Blood Group :{patient_blood_group}")
+            # st.markdown(f"Patient Blood Group :{patient_blood_group}")
+
+            st.markdown(f"**Blood Group:** {patient_dict['blood_group']}  \n**Age:** {patient_dict['age']}")
 
 
             # display patient details in a table for months from 1 to 6
