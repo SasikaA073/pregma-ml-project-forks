@@ -190,10 +190,8 @@ try:
         heart_rate = st.text_input(label='Heart Rate (in BPM)', value=ocr_heart_rate)
         month_no = st.selectbox(label='Month', options=['1','2', '3', '4', '5', '6'])
 
-        check = st.checkbox(label='I agree to share my medical data with the medical staff, hospital.(Compulsory)')
-        feedback = st.checkbox(label='I wish to share my data to improve PregMa for a better future.(optional)')
-        submit_button = st.form_submit_button(label='Check')
-        if submit_button and check:
+        submit_button = st.form_submit_button(label='Diagnose')
+        if submit_button:
 
             # get the age from the patient_id from patients database
             age = int(get_patient(patient_id)["age"])
@@ -248,10 +246,7 @@ try:
                 st.error("Please fill all the fields")
 
 
-        elif submit_button and not check:
-            st.error("You can't register without agreeing to the consent form. ")
-            \
-
+        
 except Exception as e:
     st.error("Something went wrong. Please try again.")
     st.error(e)

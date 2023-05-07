@@ -98,9 +98,13 @@ try:
         age = st.text_input(label='Age', value=ocr_age)
         blood_group = st.selectbox(label='Blood Group', options=['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'])
         
+        # consent form for the patient
+        check = st.checkbox(label='I agree to share my medical data with the medical staff, hospital.(Compulsory)')
+        feedback = st.checkbox(label='I wish to share my data to improve PregMa for a better future.(optional)')
+        
         submit_button = st.form_submit_button(label='Submit')
 
-        if submit_button:
+        if submit_button and check:
             st.write("First Name: ", first_name)
             st.write("Last Name: ", last_name)
             st.write("Age: ", age)
@@ -120,6 +124,9 @@ try:
             st.success(f"You have registered successfully.")
             st.success(f"Your patient id is {patient_id}")
 
+        elif submit_button and not check:
+            st.error("You can't register without agreeing to the consent form. ")
+        
 
 except Exception as e:
     st.error("Something went wrong... Please try again")
