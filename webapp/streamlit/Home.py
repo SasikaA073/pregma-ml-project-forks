@@ -15,41 +15,41 @@ st.set_page_config(
 
 st.title("PregMa ❤️")
 
-# User Authentication    
-credentials = {
-    "usernames":{
-        "eranga":{
-            "name":"Dr. Eranga",
-            "password": '$2b$12$JtByid2cjmgIfjF3/WjQkOpOYadkoWbv1yLtEc3XpAwaKOqeVY2tS'
-            },
-        "hiru":{
-            "name":"Dr. Hiru",
-            "password": '$2b$12$.0tFREKSvKXisqhwZt0AP.S9lqYlG8QYA0XpDUqtnnqRFokia64XO'
-            }            
-        }
-    }
+# # User Authentication    
+# credentials = {
+#     "usernames":{
+#         "eranga":{
+#             "name":"Dr. Eranga",
+#             "password": '$2b$12$JtByid2cjmgIfjF3/WjQkOpOYadkoWbv1yLtEc3XpAwaKOqeVY2tS'
+#             },
+#         "hiru":{
+#             "name":"Dr. Hiru",
+#             "password": '$2b$12$.0tFREKSvKXisqhwZt0AP.S9lqYlG8QYA0XpDUqtnnqRFokia64XO'
+#             }            
+#         }
+#     }
 
-authenticator = stauth.Authenticate(credentials, "app_home", "auth", cookie_expiry_days=30)
+# authenticator = stauth.Authenticate(credentials, "app_home", "auth", cookie_expiry_days=30)
 
-name, authentication_status, username = authenticator.login('Login', 'main')
+# name, authentication_status, username = authenticator.login('Login', 'main')
 
-if authentication_status == False:
-    st.error('Username/password is incorrect')
+# if authentication_status == False:
+#     st.error('Username/password is incorrect')
 
-if authentication_status == None:
-    st.warning('Please enter your username and password')
-# authentication_status = True
-if authentication_status:
+# if authentication_status == None:
+#     st.warning('Please enter your username and password')
+# # authentication_status = True
+# if authentication_status:
 
-    authenticator.logout('Logout', 'sidebar', key='unique_key')
-    st.sidebar.write(f'Welcome *{name}*!')
+#     authenticator.logout('Logout', 'sidebar', key='unique_key')
+#     st.sidebar.write(f'Welcome *{name}*!')
 
-    st.subheader("Pregnant mother Health Monitoring System")
+st.subheader("Pregnant mother Health Monitoring System")
 
-    # Load image
-    logo = Image.open('logo.png')
+# Load image
+logo = Image.open('logo.png')
 
-    # Display image using Streamlit
-    st.image(logo)
-    st.sidebar.error("Please use this under proper guidance of a medical staff officer!")
+# Display image using Streamlit
+st.image(logo)
+st.sidebar.error("Please use this under proper guidance of a medical staff officer!")
 

@@ -21,14 +21,14 @@ try:
 
     # Streamlit interface
     st.set_page_config(
-        page_title="PregMa - Pregnant Mother's Health Monitoring System",
-        page_icon="icon.png",
+        page_title="PregMa - Mother's Health Monitoring System",
+        page_icon="❤️",
         layout="centered",
     )
 
-    st.title("Mothers Dashboard")
+    st.title("Patient Dashboard")
 
-    st.markdown("Please enter your Patient ID")
+    st.markdown("Please enter your username")
     patientFound = False
 
     with st.form(key="patient_id_form"):
