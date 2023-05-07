@@ -1,5 +1,5 @@
 import streamlit as st
-import easyocr as ocr  
+import easyocr as ocr
 from PIL import Image
 import numpy as np
 from classes import Patient
@@ -15,29 +15,30 @@ try:
 
     patient_id = f"p{'0'*(3-len(patient_index))}{patient_index}"
 
-
-
     # Load ML model
     ml_model_name = "./month1_model.pkl"
-    ml_model = pickle.load(open(ml_model_name, 'rb'))
+    ml_model = pickle.load(open(ml_model_name, "rb"))
 
     # A dictionary to map the output of the model to the risk level
-    risk_level_dict = {0:"Low risk", 1:"Medium risk", 2:"High risk"}
+    risk_level_dict = {0: "Low risk", 1: "Medium risk", 2: "High risk"}
 
     st.set_page_config(
-        page_title="PregMa - Mother's Health Monitoring System", 
-        page_icon="icon.png", 
+        page_title="PregMa - Mother's Health Monitoring System",
+        page_icon="icon.png",
         layout="centered",
     )
 
     st.title("Register a New Mother")
 
-    image = st.file_uploader(label = "Upload your image here autofill or you can fill the form",type=['png','jpg','jpeg'])
+    image = st.file_uploader(
+        label="Upload your image here autofill or you can fill the form",
+        type=["png", "jpg", "jpeg"],
+    )
 
     @st.cache_data
-    def load_model(): 
-        reader = ocr.Reader(['en'],model_storage_directory='.')
-        return reader 
+    def load_model():
+        reader = ocr.Reader(["en"], model_storage_directory=".")
+        return reader
 
     # Initialize the variables
     ocr_first_name = ""
@@ -55,13 +56,12 @@ try:
     reader = load_model()
     if image is not None:
 
-        input_image = Image.open(image) #read image
-        st.image(input_image) #display image
+        input_image = Image.open(image)  # read image
+        st.image(input_image)  # display image
 
         with st.spinner("🤖 AI is at Work! "):
             result = reader.readtext(np.array(input_image))
-            result_text = [] #empty list for results
-
+            result_text = []  # empty list for results
 
             for text in result:
                 result_text.append(text[1])
@@ -80,29 +80,36 @@ try:
                 ocr_heart_rate = result_text[10].split(" ")[-1]
             except:
                 pass
-            
-        st.warning("Please check the autofill data and fill the form if there are any missing data")
+
+        st.warning(
+            "Please check the autofill data and fill the form if there are any missing data"
+        )
     else:
         st.write("Upload an Image")
 
-
-
-    with st.form(key='reg_form'):
+    with st.form(key="reg_form"):
         # patient_id = st.text_input(label='Patient ID').lower()
         st.markdown("Patient id is auto generated.")
-        first_name = st.text_input(label='First Name', value=ocr_first_name)
-        last_name = st.text_input(label='Last Name', value=ocr_last_name)
-        nic = st.text_input(label='NIC', value=ocr_nic)
-        mobile_number = st.text_input(label='Mobile Number', value=ocr_mobile_number)
+        first_name = st.text_input(label="First Name", value=ocr_first_name)
+        last_name = st.text_input(label="Last Name", value=ocr_last_name)
+        nic = st.text_input(label="NIC", value=ocr_nic)
+        mobile_number = st.text_input(label="Mobile Number", value=ocr_mobile_number)
 
-        age = st.text_input(label='Age', value=ocr_age)
-        blood_group = st.selectbox(label='Blood Group', options=['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'])
-        
+        age = st.text_input(label="Age", value=ocr_age)
+        blood_group = st.selectbox(
+            label="Blood Group",
+            options=["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
+        )
+
         # consent form for the patient
-        check = st.checkbox(label='I agree to share my medical data with the medical staff, hospital.(Compulsory)')
-        feedback = st.checkbox(label='I wish to share my data to improve PregMa for a better future.(optional)')
-        
-        submit_button = st.form_submit_button(label='Submit')
+        check = st.checkbox(
+            label="I agree to share my medical data with the medical staff, hospital.(Compulsory)"
+        )
+        feedback = st.checkbox(
+            label="I wish to share my data to improve PregMa for a better future.(optional)"
+        )
+
+        submit_button = st.form_submit_button(label="Submit")
 
         if submit_button and check:
             st.write("First Name: ", first_name)
@@ -116,17 +123,19 @@ try:
 
             # Update the patient id in the text file
             with open("./id_log.txt", "w") as f:
-                f.write(str(int(patient_index)+1))
+                f.write(str(int(patient_index) + 1))
 
             # write to the database
-            insert_patient(patient_id, first_name, last_name, nic, age, blood_group, mobile_number)
+            insert_patient(
+                patient_id, first_name, last_name, nic, age, blood_group, mobile_number
+            )
             # st.success(f"{patient_id} Mother registered Successfully")
             st.success(f"You have registered successfully.")
             st.success(f"Your patient id is {patient_id}")
 
         elif submit_button and not check:
             st.error("You can't register without agreeing to the consent form. ")
-        
+
 
 except Exception as e:
     st.error("Something went wrong... Please try again")
