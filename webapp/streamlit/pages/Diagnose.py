@@ -46,10 +46,10 @@ try:
 
     st.title("Diagnose ")
 
-    st.markdown("Optical Character Recognizer")
+    
 
     image = st.file_uploader(
-        label="Upload your image here autofill or you can fill the form",
+        label="Upload a photo of your medical report or manually fill the form.",
         type=["png", "jpg", "jpeg"],
     )
 
@@ -93,7 +93,7 @@ try:
             "Please check the autofill data and fill the form if there are any missing data"
         )
     else:
-        st.write("Upload an Image")
+        st.write("")
 
     # This function will return the diagnosis of the patient as a text output.
     # Taking parameters (N=normal, L=low, H=high)

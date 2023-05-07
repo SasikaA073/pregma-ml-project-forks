@@ -1,7 +1,7 @@
 import streamlit as st
 from pathlib import Path
 from PIL import Image
-import streamlit_authenticator as stauth
+# import streamlit_authenticator as stauth
 
 # import streamlit_authenticator as stauth
 # import yaml

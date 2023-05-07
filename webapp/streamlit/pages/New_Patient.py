@@ -31,7 +31,7 @@ try:
     st.title("Register a New Mother")
 
     image = st.file_uploader(
-        label="Upload your image here autofill or you can fill the form",
+        label="Upload a photo of a document with your details or manually fill the form.",
         type=["png", "jpg", "jpeg"],
     )
 
@@ -85,7 +85,7 @@ try:
             "Please check the autofill data and fill the form if there are any missing data"
         )
     else:
-        st.write("Upload an Image")
+        st.write("")
 
     with st.form(key="reg_form"):
         # patient_id = st.text_input(label='Patient ID').lower()
