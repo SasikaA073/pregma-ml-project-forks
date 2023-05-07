@@ -33,7 +33,7 @@ try:
     all_patients_details = get_all_patients()
 
     # add a filter to get only the patients predisks risks is high
-    all_patients_details = [patient for patient in all_patients_details if str(patient["prediction"]) == "2"]
+    # all_patients_details = [patient for patient in all_patients_details if str(patient["prediction"]) == "2"]
     all_patients_details = pd.DataFrame(all_patients_details)
 
     # change the dataframe column order
@@ -67,7 +67,10 @@ try:
             # display clicked option 
             st.write('You selected:', option)
             st.markdown(f"Patient Name :{patient_name}")
-            st.markdown(f"Patient Blood Group :{patient_blood_group}")
+            # st.markdown(f"Patient Blood Group :{patient_blood_group}")
+            
+            st.markdown(f"**Blood Group:** {patient_dict['blood_group']}  \n**Age:** {patient_dict['age']}")
+
 
 
             # display patient details in a table for months from 1 to 6

@@ -72,6 +72,8 @@ try:
             # display patient details in a table for months from 1 to 6
             st.markdown("## Patient Details")
 
+            # Recomment patients who has a high risk level to the doctor
+
             # get patient object
             patient_id = patient_dict["key"]
             
